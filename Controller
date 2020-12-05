@@ -1,0 +1,70 @@
+import sys
+from PyQt5 import QtCore, QtGui, QtWidgets
+from webshop import Ui_MainWindow
+from webshop2 import Ui_MainWindow2
+from webshop3 import Ui_MainWindow3
+
+class Controller:
+    def __init__(self):
+        self.MainWindow = QtWidgets.QMainWindow()
+        self.ui = Ui_MainWindow()
+        self.ui.setupUi(self.MainWindow)
+        self.ui.add_to.clicked.connect(self.pressed_add_to)
+        self.ui.buying.clicked.connect(self.openWebshop2)
+        self.MainWindow.show()
+
+    def pressed_add_to(self):
+        termek = self.ui.selection_box.currentText()
+        self.ui.product_list.addItem(termek)
+        mennyiseg = self.ui.quantity.currentText()
+        self.ui.q_list.addItem(mennyiseg)
+
+        ossz = 0
+        if termek == 'Nadrág 6000 Ft' or termek == 'Póló 3000 Ft' or termek == 'Szoknya 5000 Ft' \
+                or termek == 'Kabát 20000 Ft' or termek == 'Cipő 15000 Ft' or termek == 'Zokni 1000 Ft' or termek == 'Pulóver 8000 Ft':
+            li = termek.split(" ")
+            m=int(li[1])*int(mennyiseg)
+            self.ui.p_list.addItem(str(m))
+            ossz += m
+
+    def openWebshop2(self):
+        self.newWindow = QtWidgets.QMainWindow()
+        self.ui2 = Ui_MainWindow2()
+        self.ui2.setupUi(self.newWindow)
+        self.ui2.next.clicked.connect(self.openWebshop3)
+        self.newWindow.show()
+        self.MainWindow.close()
+
+    def openWebshop3(self):
+        self.newWindow2 = QtWidgets.QMainWindow()
+        self.ui3 = Ui_MainWindow3()
+        self.ui3.setupUi(self.newWindow2)
+        #a webshop2 feltöltött mezői értékének átmentése a webshop3 listájába
+        str = self.ui2.name.text()
+        self.ui3.vevo_adatok.addItem(str)
+        str1 = self.ui2.phone_number.text()
+        self.ui3.vevo_adatok.addItem(str1)
+        str2 = self.ui2.country.text()
+        self.ui3.vevo_adatok.addItem(str2)
+        str3 = self.ui2.city.text()
+        self.ui3.vevo_adatok.addItem(str3)
+        str4 = self.ui2.postcode.text()
+        self.ui3.vevo_adatok.addItem(str4)
+        str5 = self.ui2.address.text()
+        self.ui3.vevo_adatok.addItem(str5)
+        str6 = self.ui2.email.text()
+        self.ui3.vevo_adatok.addItem(str6)
+        str7 = self.ui.product_list.currentItem()
+        self.ui3.rendeles_adatok.addItem(str7)
+        #átmentés vége
+        self.ui3.ok.clicked.connect(self.closeWebshop3)
+        self.newWindow2.show()
+        self.newWindow.close()
+
+    def closeWebshop3(self):
+        self.newWindow2.close()
+
+if __name__ == "__main__" :
+    app = QtWidgets.QApplication(sys.argv)
+    cntrl = Controller()
+    sys.exit(app.exec_())
