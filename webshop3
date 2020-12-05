@@ -1,0 +1,59 @@
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+
+class Ui_MainWindow3(object):
+    def setupUi(self, MainWindow3):
+        MainWindow3.setObjectName("MainWindow3")
+        MainWindow3.resize(322, 368)
+        self.centralwidget = QtWidgets.QWidget(MainWindow3)
+        self.centralwidget.setObjectName("centralwidget")
+        self.ok = QtWidgets.QPushButton(self.centralwidget)
+        self.ok.setGeometry(QtCore.QRect(230, 290, 81, 21))
+        self.ok.setObjectName("ok")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(170, 10, 61, 20))
+        self.label.setObjectName("label")
+        self.label_2 = QtWidgets.QLabel(self.centralwidget)
+        self.label_2.setGeometry(QtCore.QRect(10, 10, 111, 20))
+        self.label_2.setObjectName("label_2")
+        self.label_3 = QtWidgets.QLabel(self.centralwidget)
+        self.label_3.setGeometry(QtCore.QRect(10, 290, 71, 20))
+        self.label_3.setObjectName("label_3")
+        self.rendeles_adatok = QtWidgets.QListWidget(self.centralwidget)
+        self.rendeles_adatok.setGeometry(QtCore.QRect(10, 40, 141, 241))
+        self.rendeles_adatok.setObjectName("rendeles_adatok")
+        self.vevo_adatok = QtWidgets.QListWidget(self.centralwidget)
+        self.vevo_adatok.setGeometry(QtCore.QRect(170, 40, 141, 241))
+        self.vevo_adatok.setObjectName("vevo_adatok")
+        self.listWidget = QtWidgets.QListWidget(self.centralwidget)
+        self.listWidget.setGeometry(QtCore.QRect(70, 290, 81, 21))
+        self.listWidget.setObjectName("listWidget")
+        MainWindow3.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow3)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 322, 21))
+        self.menubar.setObjectName("menubar")
+        MainWindow3.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow3)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow3.setStatusBar(self.statusbar)
+
+        self.retranslateUi(MainWindow3)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow3)
+
+    def retranslateUi(self, MainWindow3):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow3.setWindowTitle(_translate("MainWindow3", "MainWindow3"))
+        self.ok.setText(_translate("MainWindow3", "Elfogadás"))
+        self.label.setText(_translate("MainWindow3", "Ön adatai:"))
+        self.label_2.setText(_translate("MainWindow3", "Rendelésének adatai:"))
+        self.label_3.setText(_translate("MainWindow3", "Összesen:"))
+
+
+# if __name__ == "__main__":
+#     import sys
+#     app = QtWidgets.QApplication(sys.argv)
+#     MainWindow3 = QtWidgets.QMainWindow()
+#     ui = Ui_MainWindow3()
+#     ui.setupUi(MainWindow3)
+#     MainWindow3.show()
+#     sys.exit(app.exec_())
