@@ -5,6 +5,10 @@ from webshop2 import Ui_MainWindow2
 from webshop3 import Ui_MainWindow3
 
 class Controller:
+    ossz = 0
+    li=[] # a termekeket raktuk bele
+    li2=[] #az ossz éertékeket raktuk bele 
+
     def __init__(self):
         self.MainWindow = QtWidgets.QMainWindow()
         self.ui = Ui_MainWindow()
@@ -19,13 +23,18 @@ class Controller:
         mennyiseg = self.ui.quantity.currentText()
         self.ui.q_list.addItem(mennyiseg)
 
-        ossz = 0
-        if termek == 'Nadrág 6000 Ft' or termek == 'Póló 3000 Ft' or termek == 'Szoknya 5000 Ft' \
-                or termek == 'Kabát 20000 Ft' or termek == 'Cipő 15000 Ft' or termek == 'Zokni 1000 Ft' or termek == 'Pulóver 8000 Ft':
+
+        if termek == 'Nadrág 6000 Ft' or termek == 'Póló 3000 Ft' or termek == 'Szoknya 5000 Ft' or termek == 'Kabát 20000 Ft' or termek == 'Cipő 15000 Ft' or termek == 'Zokni 1000 Ft' or termek == 'Pulóver 8000 Ft':
             li = termek.split(" ")
             m=int(li[1])*int(mennyiseg)
             self.ui.p_list.addItem(str(m))
-            ossz += m
+            self.ossz += m
+            self.li.append(str(mennyiseg)+ ' db - '+ li[0])
+            self.li2.append(str(self.ossz))
+
+        self.ui.total_price.clear()
+        self.ui.total_price.addItem(str(self.ossz))
+
 
     def openWebshop2(self):
         self.newWindow = QtWidgets.QMainWindow()
@@ -42,20 +51,29 @@ class Controller:
         #a webshop2 feltöltött mezői értékének átmentése a webshop3 listájába
         str = self.ui2.name.text()
         self.ui3.vevo_adatok.addItem(str)
-        str1 = self.ui2.phone_number.text()
+        str1 =self.ui2.phone_number.text()
         self.ui3.vevo_adatok.addItem(str1)
-        str2 = self.ui2.country.text()
+        str2 =self.ui2.country.text()
         self.ui3.vevo_adatok.addItem(str2)
-        str3 = self.ui2.city.text()
+        str3 =self.ui2.city.text()
         self.ui3.vevo_adatok.addItem(str3)
-        str4 = self.ui2.postcode.text()
+        str4 =self.ui2.postcode.text()
         self.ui3.vevo_adatok.addItem(str4)
-        str5 = self.ui2.address.text()
+        str5 =self.ui2.address.text()
         self.ui3.vevo_adatok.addItem(str5)
-        str6 = self.ui2.email.text()
+        str6 =self.ui2.email.text()
         self.ui3.vevo_adatok.addItem(str6)
-        str7 = self.ui.product_list.currentItem()
-        self.ui3.rendeles_adatok.addItem(str7)
+
+
+        #rendelési adatok kitoltese
+        for i in self.li:
+            self.ui3.rendeles_adatok.addItem(i)
+
+        #webshop3_ba menteni az total_price-t
+        totalPrice=self.li2[-1]
+        self.ui3.total_price.addItem(totalPrice)
+
+
         #átmentés vége
         self.ui3.ok.clicked.connect(self.closeWebshop3)
         self.newWindow2.show()
