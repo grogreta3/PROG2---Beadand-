@@ -7,7 +7,8 @@ from webshop3 import Ui_MainWindow3
 class Controller:
     ossz = 0
     li=[] # a termekeket raktuk bele
-    li2=[] #az ossz éertékeket raktuk bele 
+    li2=[] 
+    #az ossz éertékeket raktuk bele 
 
     def __init__(self):
         self.MainWindow = QtWidgets.QMainWindow()
